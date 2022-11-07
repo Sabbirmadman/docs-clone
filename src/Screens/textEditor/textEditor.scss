@@ -1,0 +1,56 @@
+.TextEditor_container {
+    background-color: #f5f5f5;
+
+    .Text-container {
+        .ql-toolbar.ql-snow {
+            background-color: #f3f3f3;
+            border: none;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .ql-editor {
+            width: 8.5in;
+            min-height: 11in;
+            padding: 1in;
+            margin: 0.2in;
+            box-shadow: 0 0 0.5in -0.25in rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+        }
+
+        .ql-toolbar.ql-snow + .ql-container.ql-snow {
+            border: 0px;
+        }
+        .ql-container.ql-snow {
+            border: 0px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    @media print {
+        .ql-toolbar {
+            display: none;
+        }
+
+        body {
+            background-color: none;
+        }
+        .ql-editor {
+            width: 6.5in;
+            height: 9in;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
+            align-self: flex-start;
+        }
+    }
+}
+
+@page {
+    margin: 1in;
+}
