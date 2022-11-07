@@ -1,0 +1,24 @@
+
+@page{
+    margin: 1in;
+}
+
+@media print {
+  body{
+    background: none;
+  }
+
+  .ql-editor{
+    width: 6.5in;
+    height: 9in;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    align-self: flex-start;
+  }
+
+  .ql-toolbar{
+    display: none;
+  }
+  
+}

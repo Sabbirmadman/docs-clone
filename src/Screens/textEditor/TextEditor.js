@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import "./textEditor.scss";
+
 import io from "socket.io-client";
 
 import { useParams } from "react-router-dom";
@@ -101,22 +102,20 @@ export default function TextEditor() {
     }, []);
 
     //download the file
-    const handleQuillDownload = () => {
-        const quill = document.querySelector(".ql-editor");
-        const html = quill.innerHTML;
-        const blob = new Blob([html], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.download = "quill.html";
-        a.href = url;
-        a.click();
+    const handleTextPrint = () => {
+        window.print();
     };
 
     return (
         <div className="TextEditor_container">
-            <div className="Text-container" ref={wrapperRef}></div>
-            <button onClick={handleQuillDownload}>Download</button>
-            <button onClick={handleQuillDownload}>Download</button>
+            <div
+                id="printable"
+                className="Text-container"
+                ref={wrapperRef}
+            ></div>
+            <div className="downloadBtn" onClick={handleTextPrint}>
+                <i class="fa-solid fa-print"></i>
+            </div>
         </div>
     );
 }

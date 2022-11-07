@@ -2,3 +2,10 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    #remove header and footer header,
+    footer {
+        display: none;
+    }
+}
