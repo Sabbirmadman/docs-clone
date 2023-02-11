@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import "./homeScreen.scss";
+import HomePageDocView from "./HomePageDocView";
 
 export default function HomeScreen() {
     const [documents, setDocuments] = useState([]);
@@ -26,12 +27,27 @@ export default function HomeScreen() {
     };
 
     const DeleteDocument = async (id) => {
-        await axios.delete(`http://localhost:8000/documents/${id}`);
+        const res = await axios.delete(`http://localhost:8000/documents/${id}`);
+        console.log(res);
         fetchDocuments();
     };
 
     const openDocument = (id) => {
         window.location.href = `/document/edit/${id}`;
+    };
+
+    const ViewDocument = (id) => {
+        window.location.href = `/document/view/${id}`;
+    };
+
+    const changeDocumentName = async (id, documentName) => {
+        console.log(id, documentName);
+        const res = axios.put(`http://localhost:8000/documents/${id}`, {
+            documentName,
+        });
+        if (res.status === 200) {
+            fetchDocuments();
+        }
     };
 
     return (
@@ -46,24 +62,15 @@ export default function HomeScreen() {
             <div>
                 <h1>Previous Documents</h1>
                 <div className="document_holder">
-                    {documents.map((document) => (
-                        <div
-                            key={document._id}
-                            className="document_card"
-                            onClick={() => openDocument(document._id)}
-                        >
-                            <p>
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>{" "}
-                                {document._id}
-                            </p>
-
-                            <button
-                                className="delete_btn"
-                                onClick={() => DeleteDocument(document._id)}
-                            >
-                                Delete
-                            </button>
-                        </div>
+                    {documents.map((document, index) => (
+                        <HomePageDocView
+                            document={document}
+                            DeleteDocument={DeleteDocument}
+                            openDocument={openDocument}
+                            changeDocumentName={changeDocumentName}
+                            index={index}
+                            ViewDocument={ViewDocument}
+                        />
                     ))}
                 </div>
             </div>

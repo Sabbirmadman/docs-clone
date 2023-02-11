@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import HomeScreen from "./Screens/homeScreen/HomeScreen";
+import TextViewer from "./Screens/textViewer/TextViewer";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     element={<Navigate to={`/document/edit/${uuidV4()}`} />}
                 />
                 <Route path="/document/edit/:id" element={<TextEditor />} />
+                <Route path="/document/view/:id" element={<TextViewer />} />
             </Routes>
         </Router>
     );

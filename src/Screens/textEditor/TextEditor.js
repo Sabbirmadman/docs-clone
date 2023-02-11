@@ -7,6 +7,14 @@ import io from "socket.io-client";
 
 import { useParams } from "react-router-dom";
 
+import ImageResize from "quill-image-resize-module-react";
+import ImageCompress from "quill-image-compress";
+Quill.register("modules/imageResize", ImageResize);
+Quill.register("modules/imageCompress", ImageCompress);
+
+const Video = Quill.import("formats/video");
+const Link = Quill.import("formats/link");
+
 const SAVE_INTERVAL_MS = 2000;
 
 export default function TextEditor() {
@@ -59,6 +67,7 @@ export default function TextEditor() {
         };
     }, [socket, quill]);
 
+    //here we are using useCallback to prevent the function from being recreated on every render
     useEffect(() => {
         if (socket == null || quill == null) return;
 
@@ -83,6 +92,15 @@ export default function TextEditor() {
         [{ align: [] }],
         ["image", "blockquote", "code-block"],
         ["clean"],
+
+        //link
+        ["link"],
+
+        //video
+        ["video"],
+
+        //resizing the image
+        [{ size: ["small", false, "large", "huge"] }],
     ];
 
     const wrapperRef = useCallback((wrapper) => {
@@ -94,7 +112,12 @@ export default function TextEditor() {
 
         const q = new Quill(editor, {
             theme: "snow",
-            modules: { toolbar: TOOLBAR_OPTIONS },
+            modules: {
+                toolbar: TOOLBAR_OPTIONS,
+                imageResize: {
+                    modules: ["Resize", "DisplaySize", "Toolbar"],
+                },
+            },
         });
         q.disable();
         q.setText("Loading...");

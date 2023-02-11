@@ -7,6 +7,12 @@
     }
 
     .Text-container {
+        .ql-editor .ql-video {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            min-height: 250px;
+        }
         .ql-toolbar.ql-snow {
             background-color: #f3f3f3;
             border: none;
