@@ -39,8 +39,9 @@ export default function TextViewer() {
     );
 
     return (
-        <div>
-            <div className="textViewerContainer" ref={wrapperRef}></div>
+        <div className="textViewerContainer">
+            <div className="headerContainer">Teaching C</div>
+            <div className="quillViewContainer" ref={wrapperRef}></div>
         </div>
     );
 }

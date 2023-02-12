@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import "./textEditor.scss";
+import QuillBetterTable from "quill-better-table";
 
 import io from "socket.io-client";
 
@@ -118,7 +119,10 @@ export default function TextEditor() {
                     modules: ["Resize", "DisplaySize", "Toolbar"],
                 },
             },
+            //stop scrolling when applying styles to the element
+            scrollingContainer: ".Text-container",
         });
+
         q.disable();
         q.setText("Loading...");
         setQuill(q);
